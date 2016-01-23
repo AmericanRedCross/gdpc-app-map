@@ -158,9 +158,9 @@ function countryFill(status){
 function grabAppData(){
   var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1-ZdUK0ZYRj7wp6yOLGVFK8csuxmUYsWYkt4vkeU2OHQ/pubhtml';
   function grabInfo(data, tabletop) {
-		data.forEach(function(d){
+		$.each(data, function(i,d){
 			appData[d.iso] = d;
-		})
+		});
     grabGeoData();
   }
   Tabletop.init( { key: public_spreadsheet_url,
