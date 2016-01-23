@@ -171,7 +171,7 @@ function grabAppData(){
 function grabGeoData(){
   $.getJSON('data/world.geojson', function(data) {
     mapData = data;
-    mapData.features.forEach(function(d){
+    $.each(mapData.features, function(i,d){
       var countryData = appData[d.properties.iso];
       d.properties['status'] = countryData['status'];
       d.properties['fa_downloads'] = countryData['fa_downloads'];
