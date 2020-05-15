@@ -76,8 +76,8 @@
 	<div id="map"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script type="text/javascript" src="js/tabletop.js"></script> <!-- https://github.com/jsoma/tabletop -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.1.0/papaparse.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <script>
 
@@ -156,16 +156,20 @@ function countryFill(status){
 }
 
 function grabAppData(){
-  var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1-ZdUK0ZYRj7wp6yOLGVFK8csuxmUYsWYkt4vkeU2OHQ/pubhtml';
-  function grabInfo(data, tabletop) {
+  var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1-ZdUK0ZYRj7wp6yOLGVFK8csuxmUYsWYkt4vkeU2OHQ/pub?output=csv';
+  function grabInfo(data) {
 		$.each(data, function(i,d){
 			appData[d.iso] = d;
 		});
     grabGeoData();
   }
-  Tabletop.init( { key: public_spreadsheet_url,
-                     callback: grabInfo,
-                     simpleSheet: true } )
+	Papa.parse(public_spreadsheet_url, {
+		download: true,
+		header: true,
+		complete: function(results) {
+			grabInfo(results.data);
+		}
+	});
 }
 
 function grabGeoData(){
