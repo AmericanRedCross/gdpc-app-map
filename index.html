@@ -156,7 +156,7 @@ function countryFill(status){
 }
 
 function grabAppData(){
-  var public_spreadsheet_url = 'https://cors-anywhere.herokuapp.com/https://docs.google.com/spreadsheets/d/e/2PACX-1vTMa5fAK3XpxuUrA4RH2L7GFTr1k633g3Cq8ChZOPKBSHFGb8iEY9U_6n56Lcs6McvPImE_GMsMRWPQ/pub?gid=1052010868&single=true&output=csv';
+  var public_spreadsheet_url = 'https://americanredcross.github.io/google-sheets-workaround/gdpc-app-activities-map.csv';
   function grabInfo(data) {
 		$.each(data, function(i,d){
 			appData[d.iso] = d;
